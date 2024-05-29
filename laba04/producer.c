@@ -7,12 +7,7 @@ volatile sig_atomic_t runProducer = 1;
 pid_t producersPids[PRODUCERS_MAX_COUNT];
 size_t producersCount = 0;
 
-/**
- * @brief Создает нового производителя (процесс-потомок).
- *
- * Функция создает новый процесс-производитель с помощью fork().
- * Дочерний процесс занимается добавлением сообщений в общую очередь.
- */
+
 void createProducer(void) {
     if (producersCount == PRODUCERS_MAX_COUNT) {
         printf("Max count of producers is reached\n");
@@ -71,9 +66,6 @@ void createProducer(void) {
     exit(EXIT_SUCCESS); // Завершение процесса производителя
 }
 
-/**
- * @brief Удаляет последнего созданного производителя.
- */
 void deleteProducer(void) {
     if (producersCount == 0) {
         printf("There are no producers to delete\n");
@@ -84,9 +76,6 @@ void deleteProducer(void) {
     kill(producersPids[--producersCount], SIGUSR2); // Отправка сигнала завершения производителю
 }
 
-/**
- * @brief Удаляет всех созданных производителей.
- */
 void deleteAllProducers(void) {
     while (producersCount > 0) {
         deleteProducer(); // Последовательное удаление всех производителей

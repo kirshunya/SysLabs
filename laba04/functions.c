@@ -1,10 +1,5 @@
 #include "functions.h"
 
-/**
- * @brief Выводит информацию о состоянии очереди.
- *
- * @param queue Очередь для вывода информации.
- */
 void printQueueInfo(Queue* queue) {
     printf(YELLOW);
     printf("Queue status:\n");
@@ -15,12 +10,6 @@ void printQueueInfo(Queue* queue) {
     printf(WHITE);
 }
 
-/**
- * @brief Основное меню для управления процессами создания/удаления производителей и потребителей.
- *
- * @param sharedMemoryID Идентификатор разделяемой памяти.
- * @param queue Указатель на структуру очереди в разделяемой памяти.
- */
 void menu(int sharedMemoryID, Queue* queue) {
     int symbol;
     printf("Choose option:\n"
@@ -100,9 +89,6 @@ void initializeHandler(void) {
     sigaction(SIGUSR2, &act, NULL);
 }
 
-/**
- * @brief Освобождает ресурсы, связанные с разделяемой памятью и семафорами.
- */
 void cleanResources(void) {
     shm_unlink(SHARED_MEMORY_NAME); // Удаление разделяемой памяти
     sem_unlink(SEM_FREE_SPACE); // Удаление семафора для свободного места
@@ -110,13 +96,6 @@ void cleanResources(void) {
     sem_unlink(MUTEX); // Удаление семафора для мьютекса
 }
 
-/**
- * @brief Закрывает все семафоры.
- *
- * @param freeSpaceSemaphore Семафор для свободного места в очереди.
- * @param filledSpaceSemaphore Семафор для заполненного места в очереди.
- * @param mutex Семафор для мьютекса.
- */
 void closeAllSemaphores(sem_t *freeSpaceSemaphore,
                      sem_t *filledSpaceSemaphore,
                      sem_t *mutex) {
@@ -125,13 +104,6 @@ void closeAllSemaphores(sem_t *freeSpaceSemaphore,
     sem_close(mutex); // Закрытие семафора мьютекса
 }
 
-/**
- * @brief Инициализирует все необходимые семафоры.
- *
- * @param freeSpaceSemaphore Указатель на семафор для свободного места в очереди.
- * @param filledSpaceSemaphore Указатель на семафор для заполненного места в очереди.
- * @param mutex Указатель на семафор для мьютекса.
- */
 void initializeAllSemaphores(sem_t **freeSpaceSemaphore,
                           sem_t **filledSpaceSemaphore,
                           sem_t **mutex) {
@@ -158,13 +130,6 @@ void initializeAllSemaphores(sem_t **freeSpaceSemaphore,
     }
 }
 
-/**
- * @brief Инициализирует разделяемую память и связывает указатель с очередью в памяти.
- *
- * @param sharedMemoryId Указатель на идентификатор разделяемой памяти.
- * @param queue Указатель на указатель структуры очереди.
- * @param setSizeFlag Флаг, указывающий нужно ли установить размер разделяемой памяти.
- */
 void initializeSharedMemory(int *sharedMemoryId, Queue **queue, char setSizeFlag) {
     // Создание или открытие разделяемой памяти
     *sharedMemoryId = shm_open(SHARED_MEMORY_NAME, O_CREAT | O_RDWR, 0666);
@@ -187,13 +152,6 @@ void initializeSharedMemory(int *sharedMemoryId, Queue **queue, char setSizeFlag
     }
 }
 
-/**
- * @brief Открывает семафор с заданным именем и начальным значением.
- *
- * @param name Имя семафора.
- * @param semaphore Указатель на указатель семафора.
- * @param value Начальное значение семафора.
- */
 void openSemaphore(const char name[], sem_t** semaphore, int value) {
     // Открытие семафора с указанным именем и начальным значением
     *semaphore = sem_open(name, value);
