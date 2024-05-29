@@ -7,12 +7,6 @@ pid_t consumersPids[MAX_COUNT_OF_CONSUMERS];
 size_t consumersCount = 0;
 volatile sig_atomic_t runConsumer = 1;
 
-/**
- * @brief Создает нового потребителя (процесс-потомок).
- *
- * Функция создает новый процесс-потребитель с помощью fork().
- * Дочерний процесс занимается обработкой сообщений из общей очереди.
- */
 void createConsumer(void) {
     if (consumersCount == MAX_COUNT_OF_CONSUMERS) {
         printf("Max count of consumers is reached\n");
@@ -51,7 +45,7 @@ void createConsumer(void) {
         sem_wait(mutex); // Захват мьютекса
 
         printf("Consumer with pid: %d\n", getpid());
-        printf(GREEN); // Установка цвета для вывода
+        printf(YELLOW); // Установка цвета для вывода
         Message message = removeMessageFromQueue(queue); // Извлечение сообщения из очереди
         printMessage(&message); // Вывод содержимого сообщения
 
@@ -70,9 +64,7 @@ void createConsumer(void) {
     exit(EXIT_SUCCESS); // Завершение процесса потребителя
 }
 
-/**
- * @brief Удаляет последнего созданного потребителя.
- */
+
 void deleteConsumer(void) {
     if (consumersCount == 0) {
         printf("There is no consumers to delete\n");
@@ -83,9 +75,7 @@ void deleteConsumer(void) {
     kill(consumersPids[--consumersCount], SIGUSR1); // Отправка сигнала завершения потребителю
 }
 
-/**
- * @brief Удаляет всех созданных потребителей.
- */
+
 void deleteAllConsumers(void) {
     while (consumersCount > 0) {
         deleteConsumer(); // Последовательное удаление всех потребителей

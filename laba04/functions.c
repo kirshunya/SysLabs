@@ -1,7 +1,7 @@
 #include "functions.h"
 
 void printQueueInfo(Queue* queue) {
-    printf(YELLOW);
+    printf(GREEN);
     printf("Queue status:\n");
     printf("Queue current size: %d\n", queue->currentSize);
     printf("Queue max capacity: %d\n", queue->maxCapacity);
@@ -13,12 +13,12 @@ void printQueueInfo(Queue* queue) {
 void menu(int sharedMemoryID, Queue* queue) {
     int symbol;
     printf("Choose option:\n"
-           "1 - create producer\n"
-           "2 - delete producer\n"
-           "3 - create consumer\n"
-           "4 - delete consumer\n"
-           "5 - display queue info\n"
-           "q - quit\n");
+           "1.create producer\n"
+           "2.delete producer\n"
+           "3.create consumer\n"
+           "4.delete consumer\n"
+           "5.display queue info\n"
+           "q.quit\n");
     while (1) {
         symbol = getchar();
         getchar();
@@ -51,31 +51,16 @@ void menu(int sharedMemoryID, Queue* queue) {
     }
 }
 
-/**
- * @brief Обработчик сигнала SIGUSR2 для завершения процесса производителя.
- *
- * @param signal Номер сигнала.
- * @param info Информация о сигнале.
- * @param ptr Дополнительные данные.
- */
+//Завершения производителя
 void handleSIGUSR2(int signal, siginfo_t *info, void *ptr) {
     runProducer = 0; // Установка флага завершения процесса производителя
 }
 
-/**
- * @brief Обработчик сигнала SIGUSR1 для завершения процесса потребителя.
- *
- * @param signal Номер сигнала.
- * @param info Информация о сигнале.
- * @param ptr Дополнительные данные.
- */
+//Завершения потребителя
 void handleSIGUSR1(int signal, siginfo_t *info, void *ptr) {
     runConsumer = 0; // Установка флага завершения процесса потребителя
 }
 
-/**
- * @brief Инициализация обработчиков сигналов SIGUSR1 и SIGUSR2.
- */
 void initializeHandler(void) {
     struct sigaction act;
 
