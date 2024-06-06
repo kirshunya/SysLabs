@@ -1,0 +1,6 @@
+# ninja log v5
+1	177	1712235785555497850	CMakeFiles/SysLabs_1_.dir/lab2/child.c.o	f36b61c0b175410b
+1	200	1712235785578497707	CMakeFiles/SysLabs_1_.dir/lab2/parent.c.o	756b28f84dd59569
+2	200	1712235872927735703	CMakeFiles/SysLabs_1_.dir/lab2/child.c.o	f36b61c0b175410b
+1	129	1712236044952304855	CMakeFiles/SysLabs_1_.dir/lab2/child.c.o	f36b61c0b175410b
+2	152	1712236044975304490	CMakeFiles/SysLabs_1_.dir/lab2/parent.c.o	756b28f84dd59569

@@ -1,0 +1,1 @@
+CMakeLists.txt not found in /home/nikitabakunovich/Документы/GitHub/SysLabs(1) Select CMakeLists.txt

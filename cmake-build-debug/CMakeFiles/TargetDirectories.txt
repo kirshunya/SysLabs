@@ -1,0 +1,3 @@
+/home/nikitabakunovich/Документы/GitHub/SysLabs(1)/cmake-build-debug/CMakeFiles/SysLabs_1_.dir
+/home/nikitabakunovich/Документы/GitHub/SysLabs(1)/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/nikitabakunovich/Документы/GitHub/SysLabs(1)/cmake-build-debug/CMakeFiles/rebuild_cache.dir
